@@ -1,0 +1,12 @@
+default_config:
+
+homeassistant:
+  packages: !include_dir_named integrations
+  name: !secret homeassistant_name
+  latitude: !secret homeassistant_latitude
+  longitude: !secret homeassistant_longitude
+  elevation: !secret homeassistant_elevation
+  unit_system: "metric"
+  temperature_unit: "C"
+  time_zone: "Europe/Amsterdam"
+  external_url: !secret homeassistant_external_url

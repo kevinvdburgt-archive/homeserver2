@@ -1,0 +1,7 @@
+.env
+data/.cloud
+data/.storage
+data/deps
+data/*.db
+data/*.log
+data/secrets.yaml

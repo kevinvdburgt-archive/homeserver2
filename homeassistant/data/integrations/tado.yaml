@@ -1,0 +1,5 @@
+# https://www.home-assistant.io/integrations/tado/
+
+tado:
+  username: !secret tado_username
+  password: !secret tado_password

@@ -8,6 +8,9 @@ The frontend proxy server.
 
 The certificates are stored in the `./treafik/data/acme.json` which should have their permissions set to `600`.
 
+### Home Assistant
+Open source home automation.
+
 ### Transmission
 A BitTorrent client for downloading and uploading content.
 

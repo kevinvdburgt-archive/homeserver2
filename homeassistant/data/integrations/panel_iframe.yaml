@@ -1,0 +1,22 @@
+# https://www.home-assistant.io/integrations/panel_iframe/
+
+panel_iframe:
+  transmission:
+    title: "Transmission"
+    url: !secret panel_iframe_transmission_url
+    icon: "mdi:cloud-download"
+
+  nodered:
+    title: "Node Red"
+    url: !secret panel_iframe_nodered_url
+    icon: "mdi:graph"
+
+  router:
+    title: "Router"
+    url: !secret panel_iframe_router_url
+    icon: "mdi:router"
+
+  pihole:
+    title: "Pi Hole"
+    url: !secret panel_iframe_pihole_url
+    icon: "mdi:dns"

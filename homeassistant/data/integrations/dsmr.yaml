@@ -1,0 +1,7 @@
+# https://www.home-assistant.io/integrations/dsmr/
+
+sensor:
+  - platform: dsmr
+    port: /dev/usb_dsmr
+    dsmr_version: 5
+  
