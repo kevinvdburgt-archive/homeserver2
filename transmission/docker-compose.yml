@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  transmission:
+    image: linuxserver/transmission
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Amsterdam
+      - TRANSMISSION_WEB_HOME=/combustion-release/
+      - USER=${USERNAME}
+      - PASS=${PASSWORD}
+    volumes:
+      - ./data/config:/config
+      - ./data/downloads:/downloads
+      - ./data/watch:/watch
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik
+      - traefik.http.routers.homeassistant.rule=Host(`${DASHBOARD_URL}`)
+      - traefik.http.routers.homeassistant.entrypoints=websecure
+      - traefik.http.routers.homeassistant.tls=true
+      - traefik.http.routers.homeassistant.tls.certresolver=letsencrypt
+      - traefik.http.services.homeassistant.loadbalancer.server.port=9091
+    networks:
+      - traefik
+    restart: unless-stopped
+
+networks:
+  traefik:
+    external: true
