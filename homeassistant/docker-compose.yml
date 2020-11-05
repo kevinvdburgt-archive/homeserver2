@@ -19,58 +19,11 @@ services:
       - traefik.http.services.homeassistant.loadbalancer.server.port=8123
     networks:
       - traefik
+      - influxdb
     restart: unless-stopped
 
 networks:
   traefik:
     external: true
-
-# version: '3.8'
-
-# services:
-#   homeassistant:
-#     image: homeassistant/home-assistant:stable
-#     environment:
-#       - TZ=Europe/Amsterdam
-#     volumes:
-#       - ./data/homeassistant/:/config/
-#     devices:
-#       - /dev/usb_dsmr:/dev/usb_dsmr
-#     labels:
-#       - traefik.enable=true
-#       - traefik.docker.network=traefik
-#       - traefik.http.routers.homeassistant.rule=Host(`home.kevinenjillian.nl`)
-#       - traefik.http.routers.homeassistant.entrypoints=websecure
-#       - traefik.http.routers.homeassistant.tls=true
-#       - traefik.http.routers.homeassistant.tls.certresolver=letsencrypt
-#       - traefik.http.services.homeassistant.loadbalancer.server.port=8123
-#     networks:
-#       - traefik
-#       - mysql
-#       - mqtt
-#       - influxdb
-#     restart: unless-stopped
-
-#   zigbee2mqtt:
-#     image: koenkk/zigbee2mqtt:latest
-#     environment:
-#       - TZ=Europe/Amsterdam
-#       #- DEBUG=zigbee-herdsman*
-#     volumes:
-#       - ./data/zigbee2mqtt/:/app/data/
-#     devices:
-#       - /dev/usb_zigbee:/dev/usb_zigbee
-#     networks:
-#       - mqtt
-#     restart: unless-stopped
-
-# networks:
-#   traefik:
-#     external: true
-#   mysql:
-#     external: true
-#   mqtt:
-#     external: true
-#   influxdb:
-#     external: true
-
+  influxdb:
+    external: true
