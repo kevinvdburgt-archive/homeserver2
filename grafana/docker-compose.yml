@@ -1,0 +1,26 @@
+version: '3.8'
+ 
+services:
+  grafana:
+    image: grafana/grafana:latest
+    user: "1000"
+    volumes:
+      - ./data/:/var/lib/grafana
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik
+      - traefik.http.routers.grafana.rule=Host(`${DASHBOARD_URL}`)
+      - traefik.http.routers.grafana.entrypoints=websecure
+      - traefik.http.routers.grafana.tls=true
+      - traefik.http.routers.grafana.tls.certresolver=letsencrypt
+      - traefik.http.services.grafana.loadbalancer.server.port=3000
+    restart: unless-stopped
+    networks:
+      - traefik
+      - influxdb
+
+networks:
+  traefik:
+    external: true
+  influxdb:
+    external: true

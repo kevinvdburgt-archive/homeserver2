@@ -1,0 +1,25 @@
+version: '3.8'
+ 
+services:
+  influxdb:
+    image: quay.io/influxdb/influxdb:2.0.0-rc
+    volumes:
+      - ./data/:/var/lib/influxdb
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik
+      - traefik.http.routers.influxdb.rule=Host(`${DASHBOARD_URL}`)
+      - traefik.http.routers.influxdb.entrypoints=websecure
+      - traefik.http.routers.influxdb.tls=true
+      - traefik.http.routers.influxdb.tls.certresolver=letsencrypt
+      - traefik.http.services.influxdb.loadbalancer.server.port=8086
+    restart: unless-stopped
+    networks:
+      - influxdb
+      - traefik
+
+networks:
+  influxdb:
+    external: true
+  traefik:
+    external: true

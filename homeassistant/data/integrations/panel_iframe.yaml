@@ -11,6 +11,16 @@ panel_iframe:
     url: !secret panel_iframe_nodered_url
     icon: "mdi:graph"
 
+  grafana:
+    title: "Grafana"
+    url: !secret panel_iframe_grafana_url
+    icon: "mdi:chart-line"
+
+  influxdb:
+    title: "InfluxDB"
+    url: !secret panel_iframe_influxdb_url
+    icon: "mdi:database"
+
   router:
     title: "Router"
     url: !secret panel_iframe_router_url

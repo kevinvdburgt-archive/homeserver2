@@ -11,6 +11,12 @@ The certificates are stored in the `./treafik/data/acme.json` which should have 
 ### Home Assistant
 Open source home automation.
 
+### Grafana
+Visualize InfluxDB data.
+
+### InfluxDB
+Timemetrics database for logging events.
+
 ### Transmission
 A BitTorrent client for downloading and uploading content.
 
