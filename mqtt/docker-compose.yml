@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  mqtt:
+    image: eclipse-mosquitto:latest
+    volumes:
+      - ./data/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./data/data:/mosquitto/data/
+      - ./data/log:/mosquitto/log/
+    networks:
+      - mqtt
+    restart: unless-stopped
+
+networks:
+  mqtt:
+    external: true

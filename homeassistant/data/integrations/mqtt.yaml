@@ -1,0 +1,12 @@
+# https://www.home-assistant.io/integrations/mqtt/
+
+mqtt:
+  discovery: true
+  discovery_prefix: homeassistant
+  broker: !secret mqtt_broker
+  birth_message:
+    topic: 'homeassistant/status'
+    payload: 'online'
+  will_message:
+    topic: 'homeassistant/status'
+    payload: 'offline'

@@ -21,6 +21,7 @@ services:
       - traefik
       - influxdb
       - transmission
+      - mqtt
     restart: unless-stopped
 
 networks:
@@ -29,4 +30,6 @@ networks:
   influxdb:
     external: true
   transmission:
+    external: true
+  mqtt:
     external: true

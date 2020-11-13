@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  zigbee2mqtt:
+    image: koenkk/zigbee2mqtt:latest
+    environment:
+      - TZ=Europe/Amsterdam
+      # - DEBUG=zigbee-herdsman*
+    volumes:
+      - ./data/:/app/data/
+    devices:
+      - /dev/usb_zigbee:/dev/usb_zigbee
+    networks:
+      - mqtt
+    restart: unless-stopped
+
+networks:
+  mqtt:
+    external: true
