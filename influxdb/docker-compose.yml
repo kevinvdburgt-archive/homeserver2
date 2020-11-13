@@ -2,9 +2,9 @@ version: '3.8'
  
 services:
   influxdb:
-    image: quay.io/influxdb/influxdb:2.0.0-rc
+    image: quay.io/influxdb/influxdb:v2.0.1
     volumes:
-      - ./data/:/var/lib/influxdb
+      - ./data/:/root/.influxdbv2/
     labels:
       - traefik.enable=true
       - traefik.docker.network=traefik

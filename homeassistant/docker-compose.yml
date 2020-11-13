@@ -20,10 +20,13 @@ services:
     networks:
       - traefik
       - influxdb
+      - transmission
     restart: unless-stopped
 
 networks:
   traefik:
     external: true
   influxdb:
+    external: true
+  transmission:
     external: true

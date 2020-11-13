@@ -20,6 +20,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./data/acme.json:/acme.json
+      - ./data/htpasswd:/htpasswd:ro
     labels:
       - traefik.enable=true
 
@@ -27,6 +28,7 @@ services:
       - traefik.http.routers.traefik.rule=Host(`${DASHBOARD_URL}`)
       - traefik.http.routers.traefik.service=api@internal
       - traefik.http.routers.traefik.tls.certresolver=letsencrypt
+      - traefik.http.routers.traefik.middlewares=auth
       - traefik.http.services.traefik.loadbalancer.server.port=8080
 
       # Redirect all web (port 80) traffic to websecure(port 443)
@@ -36,6 +38,12 @@ services:
 
       # Middleware: http to https
       - traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https
+
+      # Middelware: basic auth
+      - traefik.http.middlewares.auth.basicauth.usersfile=/htpasswd
+      - traefik.http.middlewares.auth.basicauth.realm=Server
+      - traefik.http.middlewares.auth.basicauth.headerField=X-BasicAuth-User
+      - traefik.http.middlewares.auth.basicauth.removeheader=true
     networks:
       - traefik
     restart: unless-stopped

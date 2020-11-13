@@ -8,8 +8,8 @@ services:
       - PGID=1000
       - TZ=Europe/Amsterdam
       - TRANSMISSION_WEB_HOME=/combustion-release/
-      - USER=${USERNAME}
-      - PASS=${PASSWORD}
+      # - USER=${USERNAME}
+      # - PASS=${PASSWORD}
     volumes:
       - ./data/config:/config
       - ./data/downloads:/downloads
@@ -17,15 +17,19 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=traefik
-      - traefik.http.routers.homeassistant.rule=Host(`${DASHBOARD_URL}`)
-      - traefik.http.routers.homeassistant.entrypoints=websecure
-      - traefik.http.routers.homeassistant.tls=true
-      - traefik.http.routers.homeassistant.tls.certresolver=letsencrypt
-      - traefik.http.services.homeassistant.loadbalancer.server.port=9091
+      - traefik.http.routers.transmission.rule=Host(`${DASHBOARD_URL}`)
+      - traefik.http.routers.transmission.entrypoints=websecure
+      - traefik.http.routers.transmission.tls=true
+      - traefik.http.routers.transmission.tls.certresolver=letsencrypt
+      - traefik.http.routers.transmission.middlewares=auth
+      - traefik.http.services.transmission.loadbalancer.server.port=9091
     networks:
       - traefik
+      - transmission
     restart: unless-stopped
 
 networks:
   traefik:
+    external: true
+  transmission:
     external: true
